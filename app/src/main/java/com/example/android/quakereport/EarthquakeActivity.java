@@ -26,6 +26,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -141,7 +143,7 @@ public class EarthquakeActivity extends AppCompatActivity
         // Clear the adapter of previous earthquake data
         mAdapter.clear();
 
-        //If there is a valid list of Earthquakes, then ad them to the adapter's data set.
+        //If there is a valid list of Earthquakes, then add them to the adapter's data set.
         //This will trigger the ListView to update
 
         if (earthquakes != null && !earthquakes.isEmpty()) {
@@ -157,5 +159,22 @@ public class EarthquakeActivity extends AppCompatActivity
         Log.e("My Activity", "This is reset");
         //Loader reset, so we can clear out the existing data.
         mAdapter.clear();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
